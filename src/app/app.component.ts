@@ -1,13 +1,9 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Subscription, Observable } from 'rxjs';
+import { Subscription } from 'rxjs';
 
-interface DataModele {
-  userId: number;
-  id: number;
-  title: string;
-  completed: boolean;
-}
+import { DataService } from './data.service';
+import { DataModele } from './data.modele';
 
 @Component({
   selector: 'app-root',
@@ -20,16 +16,12 @@ export class AppComponent {
   private subscription: Subscription = new Subscription();
 
   constructor(
-    private httpClient: HttpClient,
+    private dataServece: DataService,
   ){}
 
 
-  getData(): Observable<DataModele> {
-    return this.httpClient.get<DataModele>('https://jsonplaceholder.typicode.com/todos/1').pipe();
-  }
-
   updateData(): void {
-    this.subscription.add(this.getData().subscribe((newData: DataModele) => {
+    this.subscription.add(this.dataServece.getData().subscribe((newData: DataModele) => {
       this.data = newData;
       console.log(this.data);
     }));
