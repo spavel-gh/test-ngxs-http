@@ -8,8 +8,10 @@ import { DataModele } from './data.modele';
 export class DataService {
     constructor(private httpClient: HttpClient) { }
     
-    getData(): Observable<DataModele> {
-        return this.httpClient.get<DataModele>('https://jsonplaceholder.typicode.com/todos/1').pipe();
+    public getData(): Observable<DataModele[]> {
+        console.log('service get http');
+        return this.httpClient.get<DataModele[]>('https://jsonplaceholder.typicode.com/todos/1');
+        // return this.httpClient.get<DataModele>('https://jsonplaceholder.typicode.com/todos/1').pipe();
     }
 }
 
